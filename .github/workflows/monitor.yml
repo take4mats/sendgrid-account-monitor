@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: github contexts
-        run: echo ${PWD}
+        run: echo ${GITHUB_ACTION_REPOSITORY}
       - name: mailsend
         run: |
           curl -v https://api.sendgrid.com/v3/mail/send \
@@ -25,7 +25,7 @@ jobs:
                     "email": "${{ secrets.RECIPIENT }}"
                   }
                 ],
-                "subject": "polling email from ${{ github.action_repository }}"
+                "subject": "polling email from ${GITHUB_ACTION_REPOSITORY}"
               }
             ],
             "from": {
@@ -34,7 +34,7 @@ jobs:
             "content": [
               {
                 "type": "text/plain",
-                "value": "The scheduled GitHub action sends mails to keep your SendGrid account active.  For details, check out the repository ${{ github.action_repository }}."
+                "value": "The scheduled GitHub action sends mails to keep your SendGrid account active.  For details, check out the repository ${GITHUB_ACTION_REPOSITORY}."
               }
             ]
           }
