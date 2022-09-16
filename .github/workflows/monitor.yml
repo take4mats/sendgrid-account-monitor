@@ -10,6 +10,8 @@ jobs:
     name: build
     runs-on: ubuntu-latest
     steps:
+      - name: github contexts
+        run: ${{ github }}
       - name: mailsend
         run: |
           curl -v https://api.sendgrid.com/v3/mail/send \
