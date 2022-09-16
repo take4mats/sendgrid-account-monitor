@@ -1,8 +1,9 @@
 name: Scheduled build
 
 on:
-  schedule:
-    - cron: '51 * * * *'
+  - push
+  - schedule:
+      - cron: '0 * * * *'
 
 jobs:
   build:
