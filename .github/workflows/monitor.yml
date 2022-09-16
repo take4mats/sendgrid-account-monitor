@@ -1,17 +1,14 @@
 name: Scheduled build
 
 on:
-  push
-  # schedule:
-  #   - cron: '* * * * *'
+  schedule:
+    - cron: '* * * * *'
 
 jobs:
   build:
     name: build
     runs-on: ubuntu-latest
     steps:
-      - name: github contexts
-        run: echo ${{ github.repository }}
       - name: mailsend
         run: |
           curl -v https://api.sendgrid.com/v3/mail/send \
