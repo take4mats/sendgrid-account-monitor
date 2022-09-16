@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: github contexts
-        run: echo ${{ github }}
+        run: echo ${PWD}
       - name: mailsend
         run: |
           curl -v https://api.sendgrid.com/v3/mail/send \
