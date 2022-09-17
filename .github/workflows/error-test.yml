@@ -1,0 +1,11 @@
+name: Error test
+
+on: push
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: test
+        run: cat aaa
