@@ -1,0 +1,38 @@
+name: Scheduled build
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: mailsend
+        run: |
+          curl -v https://api.sendgrid.com/v3/mail/send \
+          -H "Authorization: Bearer ${{ secrets.SG_APIKEY }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "personalizations": [
+              {
+                "to": [
+                  {
+                    "email": "${{ secrets.RECIPIENT }}"
+                  }
+                ],
+                "subject": "polling email from ${{ github.repository }}"
+              }
+            ],
+            "from": {
+              "email": "${{ secrets.SENDER }}"
+            },
+            "content": [
+              {
+                "type": "text/plain",
+                "value": "The scheduled GitHub action sends mails to keep your SendGrid account active.  For details, check out the repository ${{ github.repository }}."
+              }
+            ]
+          }
+          '
